@@ -1,0 +1,61 @@
+package com.cy.hisystem.service.impl;
+
+import java.util.List;
+
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cy.hisystem.dao.UserDao;
+import com.cy.hisystem.exception.ServiceException;
+import com.cy.hisystem.pojo.UserPojo;
+import com.cy.hisystem.service.UserService;
+import com.cy.hisystem.util.MD5EncryptionUtil;
+
+/**
+ * 用户表操作实现类
+ * @author 李溢
+ *
+ */
+@Service
+public class UserServiceImpl implements UserService{
+    
+    @Autowired
+    private UserDao userDao;
+    
+    /**
+     * 获取所有就诊医生信息
+     */
+    @Override
+    public List<UserPojo> getAllRegisterDoctor(String department,String registerType) {
+        return userDao.getAllRegisterDoctor(department, registerType);
+    }
+
+	@Override
+	public boolean doLoginChecking(String email, String plainPassword) {
+		//判断email是否合法
+		if (email==null||"".equals(email)) {
+			throw new IllegalArgumentException();
+		}
+		UserPojo userPojo = userDao.findUserAccountByEamil(email);
+		if (userPojo==null) {
+			throw new ServiceException("用户名不正确！");
+		}
+		Integer emailStatus = userPojo.getEmailStatus();
+		if (emailStatus==0) {
+			throw new ServiceException("此用户尚未通过邮箱验证！");
+		}
+		//获取数据库加密后的密码
+		String dbPassword = userPojo.getPassword();
+		//获取加密盐值
+		String salt = userPojo.getSalt();
+		//根据盐值加密获取的密码
+		String passwordCheck = new MD5EncryptionUtil().passwordCheck(plainPassword, salt);
+		//比对密码
+		if (!passwordCheck.equals(dbPassword)) {
+			throw new ServiceException("输入的密码出错！");
+		}
+		return true;
+	}
+
+}

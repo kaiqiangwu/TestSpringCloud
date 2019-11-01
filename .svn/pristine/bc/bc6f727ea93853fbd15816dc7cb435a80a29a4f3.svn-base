@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cy.hisystem.dao.MedicalRecordDao">
+
+	<!-- 根据处方号查询处方记录    吴凯强-->
+	<select id="findByPrescriptionnum" resultType="com.cy.hisystem.pojo.MedicalRecordPojo">
+		select 
+		id,
+		create_datetime createDatetime,
+		condition_description conditionDescription,
+		diagnosis_result diagnosisResult,
+		drug_cost drugCost,
+		medical_order medicalOrder,
+		prescription,
+		prescription_num prescriptionnum,
+		register_id registerId,
+		taking_drug_date_time takingDrugDateTime,
+		taking_drug_operator takingDrugOperator,
+		toll_date_time tollDateTime,
+		toll_operator tollOperator,
+		taking_drug_frequency takingDrugFrequency,
+		toll_frequency tollFrequency
+		from his_medical_record 
+		where prescription_num=#{prescriptionnum}
+	</select>
+	
+	<!-- 根据挂号查询处方记录中的处方号    陈胜-->
+	<select id="findByregisterid" resultType="com.cy.hisystem.pojo.MedicalRecordPojo">
+		select 
+		id,
+		create_datetime createDatetime,
+		condition_description conditionDescription,
+		diagnosis_result diagnosisResult,
+		drug_cost drugCost,
+		medical_order medicalOrder,
+		prescription,
+		prescription_num prescriptionnum,
+		register_id registerId,
+		taking_drug_date_time takingDrugDateTime,
+		taking_drug_operator takingDrugOperator,
+		toll_date_time tollDateTime,
+		toll_operator tollOperator,
+		taking_drug_frequency takingDrugFrequency,
+		toll_frequency tollFrequency
+		from his_medical_record 
+		where id=#{id}
+	</select>
+	
+	<!-- 根据处方号更新取药信息   吴凯强 -->
+	<update id="updateByPrescriptionnum">
+		update his_medical_record 
+		set toll_date_time=now(),taking_drug_operator=#{takingDrugOperator},taking_drug_frequency=taking_drug_frequency+1
+		where prescription_num=#{prescriptionnum}
+	</update>
+	
+	
+</mapper>

@@ -1,0 +1,103 @@
+package com.cy.hisystem.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.cy.hisystem.service.AnnouncementService;
+import com.cy.hisystem.vo.JsonResult;
+import com.cy.hisytem.pojo.vo.AnnouncementVo;
+
+@Controller
+@RequestMapping("/admin")
+/**
+ * Controller控制层
+ * @author Leo 徐忠春
+ *
+ */
+public class AnnouncementController {
+	@Autowired
+	private AnnouncementService announcementService;
+
+	/**
+	 * 添加公告
+	 * @return
+	 */
+	@RequestMapping("/addAnnouncement")
+	@ResponseBody
+	public String addAnnouncement(@RequestBody AnnouncementVo anno) {
+		announcementService.addAnnouncement(anno);
+		return "SUCCESS";
+
+	}
+
+	/**
+	 * 查看所有公告
+	 * @return 
+	 */
+	@RequestMapping("/getAnnouncement")
+	@ResponseBody
+	public  List<AnnouncementVo> getAnnouncement(Integer pageNumber) {
+		List<AnnouncementVo> list = announcementService.findAnnouncement(pageNumber);
+		return list;
+
+
+	}
+
+	/**
+	 * 删除公告
+	 */
+	@RequestMapping("/deleteAnnouncement")
+	@ResponseBody
+	public  String deleteAnnouncement(String id) {
+		announcementService.deleteAnnouncement(id);
+		return "SUCCESS";
+
+
+	}
+	
+
+	/**
+	 * 根据id修改公告
+	 */
+	@RequestMapping("/changeAnnouncement")
+	@ResponseBody
+	public String changeAnnouncement(@RequestBody AnnouncementVo anno) {
+		System.out.println(anno);
+		announcementService.updateAnnouncement(anno);
+		return "SUCCESS";
+
+	}
+	
+	
+	/**
+	 * 把公告添加到主页显示
+	 */
+	@RequestMapping("/add_Announcement")
+	@ResponseBody
+	public String inserAtnouncement(AnnouncementVo anno) {
+		int add = announcementService.insertAnnouncement(anno);
+		return "SUCCESS";
+		
+		
+	}
+	
+	/**
+	 * 把公告从主页移除
+	 */
+	@RequestMapping("/sub_Announcement")
+	@ResponseBody
+	public String supAtnouncement(AnnouncementVo anno) {
+		System.out.println(anno);
+		announcementService.subAnnouncement(anno);
+		return "SUCCESS";
+		
+		
+	}
+
+
+}

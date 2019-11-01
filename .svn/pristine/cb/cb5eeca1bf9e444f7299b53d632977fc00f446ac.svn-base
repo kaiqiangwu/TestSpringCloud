@@ -1,0 +1,30 @@
+package com.cy.hisystem.dao;
+/**
+ * 用户信息操作接口
+ * @author 李溢
+ *
+ */
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import com.cy.hisystem.pojo.UserPojo;
+@Mapper
+public interface UserDao {
+    /**
+     * 从User表中获取用户中所有的挂号医生信息
+     * @return
+     */
+    List<UserPojo> getAllRegisterDoctor(
+            @Param("department") String department,
+            @Param("registerType") String registerType);
+    
+    /**
+     * 	通过email找到相应地用户账户信息
+     * @param email	传入的email
+     * @return	返回封装好的用户信息
+     */
+    UserPojo findUserAccountByEamil(String email);
+}

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- 李溢:用户表相关操作映射文件 -->
+<mapper namespace="com.cy.hisystem.dao.UserDao">
+    <!-- 查询所有就诊医生信息(名称,门诊时间,诊查费,限额数,已挂号数) -->
+    <select id="getAllRegisterDoctor" resultType="com.cy.hisystem.pojo.UserPojo">
+        select 
+        id,email,username,plain_password plainPassword,password,salt,create_datetime creatDatetime,address,political_status politicalStatus,phone,birthday,sex,allow_num allowNum,department,grade,treatment_price treatmentPrice,work_address wordAddress,work_date_time workDateTime,work_status wordStatus,email_status emailStatus,validate_code validateCode,department_type departmentType,now_num nowNum,update_time updateTime
+        from his_user
+        where
+        department=#{department} and department_type=#{registerType}
+    </select>
+    
+    <select id="findUserAccountByEamil" resultType="com.cy.hisystem.pojo.UserPojo">
+    	select id,email,username,plain_password plainPassword,password,salt,create_datetime creatDatetime,address,political_status politicalStatus,phone,birthday,sex,allow_num allowNum,department,grade,treatment_price treatmentPrice,work_address wordAddress,work_date_time workDateTime,work_status wordStatus,email_status emailStatus,validate_code validateCode,department_type departmentType,now_num nowNum,update_time updateTime from his_user where email = #{email}
+    </select>
+     
+    <!-- 注册用户信息 -->
+    <insert id="insertUserSignup">
+    	insert into 
+    	his_user(id,email,username,plain_password,password,salt,create_datetime,email_status,validate_code)
+    	values(#{id},#{email},#{username},#{plainPassword},#{password},#{salt},#{createDatetime},"0",#{validateCode})
+    </insert>
+    
+    <!-- 根据email更新账号状态，激活账号 -->
+    <update id="updateEmailStatusByEmail">
+    	update his_user set email_status="1" where email=#{email}
+    </update>
+    
+    <!-- 根据email查找验证码 -->
+    <select id="findValidateCodeByEmail" resultType="String"> 
+    	select validate_code from his_user where email=#{email}
+    </select>
+    
+    <select id="selectEmailCount" resultType="int">
+    	select count(*) from his_user where email=#{email}
+    </select>
+    
+    <!-- 肖家睿: 个人中心查询用户信息 -->
+    <select id="findUserObjects" resultType="com.cy.hisystem.pojo.UserPojo">
+    	SELECT id,email,username,plain_password plainPassword,password,salt,create_datetime creatDatetime,address,political_status politicalStatus,phone,birthday,sex,allow_num allowNum,department,grade,treatment_price treatmentPrice,work_address wordAddress,work_date_time workDateTime,work_status wordStatus,email_status emailStatus,validate_code validateCode,department_type departmentType,now_num nowNum,update_time updateTime from his_user 
+    </select>
+    
+    <!-- 肖家睿: 个人中心查询用户信息修改 -->
+    <update id="changeUserInfo">
+    	UPDATE his_user set username =#{username},sex=#{sex},birthday=#{birthday},political_status=#{politicalStatus},phone=#{phone},address=#{address} where id=#{id}
+    </update>
+    
+</mapper>

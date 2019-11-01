@@ -1,0 +1,31 @@
+package com.cy.hisystem.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cy.hisystem.dao.UserDao;
+import com.cy.hisystem.pojo.UserPojo;
+import com.cy.hisystem.service.UserService;
+
+/**
+ * 用户表操作实现类
+ * @author 李溢
+ *
+ */
+@Service
+public class UserServiceImpl implements UserService{
+    
+    @Autowired
+    private UserDao userDao;
+    
+    /**
+     * 获取所有就诊医生信息
+     */
+    @Override
+    public List<UserPojo> getAllRegisterDoctor(String department,String registerType) {
+        return userDao.getAllRegisterDoctor(department, registerType);
+    }
+
+}

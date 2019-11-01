@@ -1,0 +1,78 @@
+$(window).preloader();
+
+Split(['#myprescription', '#takingDrugOperation'], {
+    sizes: [65, 35],
+    minSize: [800, 400]
+});
+
+function getMedicalRecord() {
+    var prescriptionNum = $("#prescriptionNum_input").val();
+
+    if (prescriptionNum == null || prescriptionNum == '') {
+        swal("请填写处方号！", "", "error");
+        return false;
+    }
+
+    debugger;
+    $.ajax({
+        url: "/takingdrug/getMedicalRecord",
+        type: "post",
+        data: {
+            "prescriptionNum": prescriptionNum
+        },
+        success: function (data) {
+            if (data.state == 1) {
+                $("#name").val(data.data.name);
+                $("#sex").val(data.data.sex);
+                $("#nationality").val(data.data.nationality);
+                $("#age").val(data.data.age);
+                $("#prescriptionNum").val(prescriptionNum);
+                $("#date").val(data.data.medicalRecord.createDatetime);
+                $("#department").val(data.data.department);
+                $("#diagnosisResult").val(data.data.medicalRecord.diagnosisResult);
+                $("#medicalOrder").html(data.data.medicalRecord.medicalOrder);
+                $("#drugCost").val(data.data.medicalRecord.drugCost);
+                $("#doctorName").val(data.data.doctorName);
+                $("#prescription").html(data.data.medicalRecord.prescription);
+                $("#examinationCost").val(data.data.treatmentPrice);
+            } else {
+                swal(data.message, "", "error")
+            }
+        }
+    })
+}
+
+function saveTakingDrugInfo() {
+
+    var prescriptionNum = $("#prescriptionNum_input").val();
+
+    if (prescriptionNum == null || prescriptionNum == '') {
+        swal("请填写处方号！", "", "error");
+        return false;
+    }
+
+    $.ajax({
+        url: "/takingdrug/saveTakingDrugInfo",
+        type: "post",
+        data: {
+            "prescriptionNum": prescriptionNum
+        },
+        success: function (data) {
+
+            if (data.state == 1) {
+                swal({
+                    title: "提交成功！",
+                    type: "success",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true
+                }, function () {
+                    window.location.reload()
+                })
+            }else {
+                swal(data.message, "", "error")
+            }
+        }
+
+    })
+}

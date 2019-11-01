@@ -1,0 +1,95 @@
+package com.cy.hisystem.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+/**
+ * 页面访问控制类
+ * 
+ * @author 李溢 张孙传 肖家睿 吴凯强 黄德傲 陈胜 陈旭升
+ */
+@RequestMapping("/")
+@Controller
+public class PageController {
+
+	/**
+	 * 
+	 * @return 访问登录页面
+	 */
+	@RequestMapping("doLogin")
+	public String doIndex() {
+		return "login";
+	}
+
+	/**
+	 * @return 访问主页
+	 */
+	@RequestMapping("main")
+	public String doMainPages() {
+		return "main";
+	}
+
+	/**
+	 * @return 访问药物管理
+	 */
+	@RequestMapping("drugManage")
+	public String dodrugManage() {
+		return "drugStore/drugManage";
+	}
+
+	/**
+	 * @return 访问药品入库管理
+	 */
+	@RequestMapping("storageManage")
+	public String storageManage() {
+		return "drugStore/storageManage";
+	}
+
+	/**
+	 * 
+	 * @return 访问药房取药页面.
+	 */
+	@RequestMapping("takingdrug")
+	public String dotakingdrug() {
+		return "takingdrug/takingdrug";
+	}
+
+	/**
+	 * 
+	 * @return 访问 门诊管理页面
+	 */
+	@RequestMapping("outpatient")
+	public String doOutPatient() {
+		return "outpatient/outpatient";
+	}
+
+	/**
+	 * 访问挂号收费页面
+	 * 
+	 * @return
+	 */
+	@RequestMapping("register")
+	public String doRegister() {
+		return "register/register";
+	}
+
+	/**
+	 * 划价页面 by 陈胜
+	 * 
+	 * @return
+	 */
+	@RequestMapping("/toll")
+	public String doAnnouncement() {
+		return "toll/toll";
+	}
+
+	/**
+	 * 
+	 * 陈旭升 挂号记录显示页面
+	 */
+	@RequestMapping("registerRecord")
+	public String registerRecord() {
+		return "register/registerRecord";
+	}
+
+}

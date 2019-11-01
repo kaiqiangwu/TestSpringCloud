@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cy.hisystem.dao.DrugDao">
+	<!-- 肖家睿:根据筛选条件查询药品信息 -->
+	<select id="findDrugObjects" resultType="com.cy.hisystem.pojo.DrugPojo">
+		SELECT * FROM his_drug
+		<where>
+			<if test="name != null and name != '' ">
+					and name=#{name} 			
+			</if>
+			<if test="drugType != null and drugType != '' ">
+					and drug_type=#{drugType} 		
+			</if>
+			<if test="limitStatus != null  ">
+					and limit_status=#{limitStatus} 			
+			</if>
+			<if test="efficacyClassification != null and efficacyClassification != '' ">
+					and efficacy_classification=#{efficacyClassification}			
+			</if>
+		</where>
+	</select>
+	
+	<!-- 肖家睿:删除药品信息 -->
+	<delete id="deleteDrug">
+		DELETE FROM his_drug WHERE name=#{name}
+	</delete>
+	
+	<!-- 肖家睿:修改药品信息 -->
+	<update id="updateDrug">
+		UPDATE his_drug SET 
+		name=#{name},drug_type=#{drugType},specification=#{specification},
+		unit=#{unit},limit_status=#{limitStatus},efficacy_classification=#{efficacyClassification},
+		wholesale_price=#{wholesalePrice},price=#{price},production_date=#{productionDate},
+		quality_date=#{qualityDate},manufacturer=#{manufacturer}
+	</update>
+	
+	<!-- 插入新的药物的药品信息 -->
+	<insert id="addNewDrug">
+		insert into his_drug value
+		(
+		#{id},#{createDatetime},#{drugType},#{efficacyClassification},
+		#{limitStatus},#{manufacturer},#{name},#{num},#{price},
+		#{specification},#{unit},#{wholesalePrice},#{storageQuantity},
+		#{productionDate},#{qualityDate}
+		)
+	</insert>
+	<!-- 获取所有药品类别 -->
+	<select id="getAllDrugType" resultType="com.cy.hisystem.pojo.DrugTypePojo">
+		select * from his_drug_type
+	</select>
+	<select id="getAllEfficacyClassification" 
+	resultType="String">
+		select distinct efficacy_classification from his_efficacy_classification
+	</select>
+	
+	<select id="findDrugCountByName" resultType="Integer">
+		select count(*) from his_drug where name = #{name}
+	</select>
+	
+	<update id="addStorageQuantity">
+		update his_drug set storage_quantity = storage_quantity + #{addStorageQuantity}
+		where name = #{drugName}
+	</update>
+	<insert id="addDrugType">
+		insert into his_drug_type values
+		(
+		#{id},#{createDatetime},#{drugType}
+		)
+	</insert>
+	<insert id="addEfficacyClassification">
+		insert into his_efficacy_classification value
+		(
+		#{id},#{createDatetime},#{efficacyClassification}
+		)
+	</insert>
+</mapper>
+
+
+
+

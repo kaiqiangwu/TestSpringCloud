@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- 李溢: 此mapper用于就诊卡注册相关查询 -->
+<mapper namespace="com.cy.hisystem.dao.IdCardDao">
+    <!-- 根据就诊卡id查询就诊卡信息 -->
+    <select id="selectIdCardPojoByCardNumber" resultType="com.cy.hisystem.pojo.IdCardPojo">
+        select card_id cardNumber,address adress,birthday birth,id_card idNumber,name,nationality,sex from 
+        his_idcard 
+        where 
+        card_id=#{cardId}
+    </select>
+    
+    
+    <!-- 新增就诊卡信息 -->
+    <insert id="insertIdCard">
+        insert into
+        his_idcard
+        (card_id,address,birthday,id_card,name,nationality,sex)
+        values
+        (#{cardNumber},#{adress},#{birth},#{idNumber},#{name},#{nationality},#{sex})
+    </insert>
+</mapper>

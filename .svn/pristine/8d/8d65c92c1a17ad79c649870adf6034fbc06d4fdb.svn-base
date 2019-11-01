@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- 李溢:挂号表相关操作映射文件 -->
+<mapper namespace="com.cy.hisystem.dao.RegisterDao">
+
+    <insert id="insertRegister">
+        insert into his_register
+        (id,create_datetime,department,doctor,pay_type,register_type,treatment_price, patient_id, operator_email,operator_name,charge_status,register_status,treatment_status,registered_num,doctor_id)
+        values
+        (#{id},now(),#{department},#{doctor},#{payType},#{registerType},#{treatmentPrice},#{patientId},#{operatorEmail},#{operatorName},#{chargeStatus},#{registerStatus},#{treatmentStatus},#{registeredNum},#{doctorId})
+    </insert>
+    
+	<!-- 根据挂号表id查询挂号记录 -->
+	<select id="findById" resultType="com.cy.hisystem.pojo.RegisterPojo">
+		select 
+		id,
+		create_datetime createDatetime,
+		department,
+		doctor,
+		pay_type payType,
+		register_type  registerType,
+		treatment_price treatmentPrice,
+		patient_id patientId,
+		operator_email operatorEmail,
+		operator_name operatorName,
+		charge_status chargeStatus,
+		register_status registerStatus,
+		treatment_status treatmentStatus,
+		registered_num registeredNum,
+		doctor_id doctorId
+		from his_register
+		where id=#{id}
+	</select>
+	
+	<!-- 根据卡号与收费状态查询当前用户当天挂号信息 by陈胜-->
+	<select id="getRegisterInfos" resultType="com.cy.hisystem.pojo.RegisterPojo">
+		select 
+		id,
+		create_datetime createDatetime,
+		department,
+		doctor,
+		pay_type payType,
+		register_type  registerType,
+		treatment_price treatmentPrice,
+		patient_id patientId,
+		operator_email operatorEmail,
+		operator_name operatorName,
+		charge_status chargeStatus,
+		register_status registerStatus,
+		treatment_status treatmentStatus,
+		registered_num registeredNum,
+		doctor_id doctorId
+		from his_register
+		where 
+		<if test="patientId!=null and patientId!=''">
+           patient_id=#{patientId} 
+        </if>
+		<if test="tollStatus!=null and tollStatus!=''">
+           and charge_status=#{tollStatus}
+         </if>
+	</select>
+	
+</mapper>

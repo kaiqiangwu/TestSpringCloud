@@ -1,0 +1,74 @@
+package com.cy.hisystem.service.impl;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Service;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring5.SpringTemplateEngine;
+
+import com.cy.hisystem.service.EmailService;
+
+/**
+ * 邮件发送工具类
+ *
+ * @author 吴凯强
+ */
+@Service
+public class EmailServiceImpl implements EmailService {
+	
+	/** 发件人地址 */
+	private String fromEmail = "3230335956@qq.com";
+	
+
+	
+	/** 邮件发送环境 */
+	private Context context = new Context();
+	
+    @Autowired
+    private SpringTemplateEngine templateEngine;
+    
+    @Autowired
+    private JavaMailSender mailSender;
+    
+    /**
+     * @param name 网页返回的参数名
+     * @param value 网页返回的参数值
+     */
+    @Override
+    public void setVariable(String name ,String value ) {
+    	context.setVariable(name, value);
+    }
+    
+    /**
+     * 
+     * @param toEmail 收件人地址
+     * @param title 邮件标题
+     * @param template 邮件正文html地址
+     * @throws MessagingException
+     */
+    @Override
+    public void sendEmail(String toEmail,String title,String template) throws MessagingException {
+    	
+    	MimeMessage mimeMessage = mailSender.createMimeMessage();
+    	MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage,true);
+    	
+    	mimeMessageHelper.setFrom(fromEmail);
+    	mimeMessageHelper.setTo(toEmail);
+    	mimeMessageHelper.setSubject(title);
+    	
+    	String textHtml = templateEngine.process(template, context);
+    	
+    	mimeMessageHelper.setText(textHtml, true);
+    	
+    	mailSender.send(mimeMessage);
+    }
+
+	public String getFromEmail() {
+		return fromEmail;
+	}
+
+}

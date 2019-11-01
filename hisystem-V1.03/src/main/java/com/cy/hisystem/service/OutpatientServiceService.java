@@ -1,0 +1,45 @@
+package com.cy.hisystem.service;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.cy.hisystem.pojo.MedicalRecordPojo;
+import com.cy.hisystem.pojo.PatientInforRspPojo;
+
+public interface OutpatientServiceService {
+	/**
+	 * 根据cardId查询病人信息
+	 * 
+	 * @param cardId
+	 * @return
+	 */
+	PatientInforRspPojo findPatientInforRsp(
+			@Param("cardId") String cardId);
+
+	/**
+	 * 在门诊页面获取婚姻
+	 * ,职业,个人史,既往史,家族史 
+	 * 存入PatientInforRspPojo对象中
+	 * ,往数据库存储
+	 * 
+	 * @param patient
+	 */
+	int changePatientInfor(
+			@Param("career")String career,
+			@Param("familyHistory")String familyHistory,
+			@Param("maritalStatus")String maritalStatus,
+			@Param("pastHistory")String pastHistory,
+			@Param("personalHistory")String personalHistory);
+	
+	/**
+	 * 查询检查结果的方法
+	 * @return
+	 */
+	int findMedicalExamination();
+	
+	/**
+	 * 提交所有数据入库的方法
+	 * @return
+	 */
+	int addMedicalRecord(MedicalRecordPojo MedicalRecordPojo);
+
+}

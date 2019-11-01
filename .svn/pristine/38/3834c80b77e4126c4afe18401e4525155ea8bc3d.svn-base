@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- 陈旭升   用户挂号记录查询 -->
+<mapper namespace="com.cy.hisystem.dao.RegisterRecordDao">
+   <select id="findObjects" resultType="com.cy.hisystem.pojo.RegisterRecord">
+SELECT
+	his_idcard.card_id,
+	his_idcard.NAME,
+	his_register.department,
+	his_register.register_type,
+	his_register.doctor,
+	his_register.create_datetime,
+	his_register.operator_name,
+	his_register.operator_email 
+FROM
+	his_idcard
+	RIGHT JOIN his_patient ON his_idcard.card_id = his_patient.card_id
+	RIGHT JOIN his_register ON his_patient.id = his_register.patient_id 
+WHERE
+	his_register.department = '${department}' 
+	AND his_register.register_type = '普通门诊' 
+	AND his_register.create_datetime &gt; '2019-03-01' 
+	AND his_register.create_datetime &lt; '2019-09-19'
+</select>
+</mapper>

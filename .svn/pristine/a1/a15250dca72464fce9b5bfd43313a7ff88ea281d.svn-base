@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 张孙传 -->
+<!-- 用于门诊获取,查询,存入数据的Mapper -->
+<mapper namespace="com.cy.hisystem.dao.OutpatientServiceDao">
+	<!--根据就诊卡Id查询病人信息 -->
+	<select id="findPatientInforRsp" 
+		resultType="com.cy.hisystem.pojo.PatientInforRspPojo">
+		SELECT
+		id,
+		create_datetime createDatetime,
+		address,
+		birthday,
+		card_id cardId,
+		id_card idCard,
+		name,
+		nationality,
+		sex,
+		telphone,
+		career,
+		family_history familyHistory,
+		marital_status maritalStatus,
+		past_history pastHistory,
+		personal_history personalHistory
+		FROM
+		his_patient
+		WHERE
+		card_id=#{cardId}
+	</select>
+
+	<!-- 在门诊页面获取到婚姻,职业,个人史,既往史,家族史 存入his_patient表中. -->
+	<update id="changePatientInfor">
+		UPDATE
+		his_patient
+		SET
+		career = #{career},
+		family_history = #{familyHistory},
+		marital_status = #{maritalStatus},
+		past_history = #{pastHistory},
+		personal_history = #{personalHistory}
+	</update>
+
+	<select id="findMedicalExamination">
+		SELECT
+		blood_pressure bloodPressure,
+		body_temperature bodyTemperature,
+		heart_rate heartRate,
+		pulse pulse
+		FROM
+		his_medical_examination
+	</select>
+
+	<!-- 根据患者表id查询患者信息 -->
+	<select id="findPatientInforById"
+		resultType="com.cy.hisystem.pojo.PatientInforRspPojo">
+		select
+		id,
+		create_datetime createDatetime,
+		address,
+		birthday,
+		card_id cardId,
+		id_card idCard,
+		name,
+		nationality,
+		sex,
+		telphone,
+		career,
+		family_history familyHistory,
+		marital_status maritalStatus,
+		past_history pastHistory,
+		personal_history personalHistory
+		from his_patient
+		where id=#{id}
+	</select>
+	
+	<insert id="addMedicalRecord">
+	
+	
+	
+	
+	
+	</insert>
+
+
+</mapper>

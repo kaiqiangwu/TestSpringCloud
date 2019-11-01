@@ -1,0 +1,36 @@
+package com.cy.hisystem.service;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.cy.hisystem.pojo.DrugPojo;
+/**
+ *	 药物管理药品信息查询
+ * @author 肖家睿
+ *
+ */
+public interface DrugManageService {
+	/**
+	 * 根据条件/查询药品信息
+	 */
+	List<DrugPojo> findDrugObjects(
+			String name,
+			String drugType,
+			String limitStatus,
+			String efficacyClassification
+			);
+	
+	/**
+	 * 肖家睿
+	 * 删除药品信息 
+	 */
+	int deleteDrug(@Param("name")String name
+			);
+	
+	/**
+	 * 肖家睿
+	 * 修改药品信息
+	 */
+	int updateDrug(DrugPojo drugPojo);
+}

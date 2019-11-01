@@ -1,0 +1,22 @@
+package com.cy.hisystem.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cy.hisystem.vo.JsonResult;
+/**
+ * 
+ * @author 黄德傲
+ *
+ */
+@RestController
+@RequestMapping("/user/")
+public class LoginSignupController {
+
+	@RequestMapping("dologin")
+    public JsonResult dologin(String broswer,String email,String ip,String password) {
+    	
+		return null;
+    }
+}
+

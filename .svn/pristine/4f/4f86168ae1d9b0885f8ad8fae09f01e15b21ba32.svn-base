@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.cy.hisystem.dao.RoleDao">
+	<!-- 根据角色代号查询过角色id -->
+	<select id="findRoleIdByRoleValue" resultType="String">
+		select id from his_role where role_value=#{roleValue}
+	</select>
+	
+	<!-- 根据角色id查询角色名 -->
+	<select id="findRoleByRoleId" resultType="String">
+		select role from his_role 
+		<where>
+			<foreach collection="list" item="roleId" >
+				or id=#{roleId}
+			</foreach>
+		</where>
+	</select>
+	
+</mapper>

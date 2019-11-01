@@ -1,0 +1,92 @@
+package com.cy.hisystem.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import com.cy.hisystem.pojo.DrugPojo;
+import com.cy.hisystem.pojo.DrugTypePojo;
+import com.cy.hisystem.pojo.EfficacyClassificationPojo;
+
+/**
+ * 
+ * @author 肖家睿  黄德傲
+ *
+ */
+@Mapper
+public interface DrugDao {
+	/**
+	 * 肖家睿
+	 * 根据条件查询药品信息
+	 */
+	List<DrugPojo> findDrugObjects(
+			@Param("name")String name,
+			@Param("drugType")String drugType,
+			@Param("limitStatus")String limitStatus,
+			@Param("efficacyClassification")String efficacyClassification
+			);
+	
+	/**
+	 * 肖家睿
+	 * 删除药品信息 
+	 */
+	int deleteDrug(@Param("name")String name
+			);
+	
+	/**
+	 * 肖家睿
+	 * 修改药品信息
+	 */
+	int updateDrug(DrugPojo drugPojo);
+	
+	/**
+	 * 查找数据库his_drug_type中所有药品类别
+	 * @return	由所有药品类别信息组成的List
+	 */
+	List<DrugTypePojo> getAllDrugType();
+	
+	/**
+	 * 查找数据库his_drug中所有药品的功效
+	 * @return 所有药品功效组成的List
+	 */
+	List<String> getAllEfficacyClassification();
+	
+	/**
+	 * 向数据库中新药品
+	 * @param drugPojo 前端获取的药品信息
+	 * @return
+	 */
+	int addNewDrug(DrugPojo drugPojo);
+	
+	/**
+	 * 通过药品名称查找数据库中相同名字药品的数量
+	 * @param name
+	 * @return
+	 */
+	int findDrugCountByName(String name);
+	
+	/**
+	 * 向数据库中更新指定药品名称的药品的库存量
+	 * @param drugName 指定药品名称
+	 * @param addStorageQuantity	要添加的数量
+	 * @return
+	 */
+	int addStorageQuantity(
+			@Param("drugName")String drugName,
+			@Param("addStorageQuantity")Integer addStorageQuantity);
+	
+	/**
+	 * 添加新的药品剂型
+	 * @param drugType	药品剂型
+	 * @return
+	 */
+	int addDrugType(String drugType);
+	
+	/**
+	 * 	向数据库插入新的药瓶功效
+	 * @param efficacyClassificationPojo 药品功效实体类
+	 * @return
+	 */
+	int addEfficacyClassification(EfficacyClassificationPojo efficacyClassificationPojo);
+}

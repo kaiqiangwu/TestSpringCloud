@@ -1,0 +1,17 @@
+package com.cy.hisystem.aspect;
+
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Service;
+
+@Aspect
+@Service
+
+public class TimeLog {
+    @Pointcut("bean(*ServiceImpl)")
+    public void timeLogPointCut() {}
+    
+    public Object doLogTime() {
+        return null;
+    }
+}

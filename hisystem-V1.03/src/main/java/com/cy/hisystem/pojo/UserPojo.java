@@ -1,0 +1,316 @@
+package com.cy.hisystem.pojo;
+
+import java.io.Serializable;
+
+/**
+ * 用户信息实体类
+ * @author 李溢
+ *
+ */
+public class UserPojo implements Serializable{
+    /**
+     * 序列化编码
+     */
+    private static final long serialVersionUID = -4905088387734857154L;
+    /**用户id*/
+    private String id;
+    /**邮箱*/
+    private String email;
+    /**用户姓名*/
+    private String username;
+    /**用户原密码*/
+    private String plainPassword;
+    /**加密后用户密码*/
+    private String password;
+    /**盐值*/
+    private String salt;
+    /**创建时间*/
+    private String creatDatetime;
+    /**地址*/
+    private String address;
+    /**政治面貌*/
+    private String politicalStatus;
+    /**电话号码*/
+    private String phone;
+    /**出生年月日*/
+    private String birthday;
+    /**性别*/
+    private String sex;
+    /**限额就诊数*/
+    private Integer allowNum;
+    /**科室名称*/
+    private String department;
+    /**等级*/
+    private String grade;
+    /**诊查费*/
+    private String treatmentPrice;
+    /**科室地点*/
+    private String wordAddress;
+    /**工作时间*/
+    private String workDateTime;
+    /**工作状态*/
+    private String workStatus;
+    /**邮箱激活状态*/
+    private Integer emailStatus;
+    /**验证码*/
+    private String validateCode;
+    /**门诊类别(普通门诊/急诊)*/
+    private String departmentType;
+    /**当前就诊人数*/
+    private Integer nowNum;
+    /**更新时间*/
+    private String updateTime;
+    
+    /**
+     * 无参构造
+     */
+    public UserPojo() {
+    }
+    
+    /**
+     * 全参构造
+     */
+    public UserPojo(String id, String email, String username, String plainPassword, String password, String salt,
+            String creatDatetime, String address, String politicalStatus, String phone, String birthday, String sex,
+            Integer allowNum, String department, String grade, String treatmentPrice, String wordAddress,
+            String workDateTime, String workStatus, Integer emailStatus, String validateCode, String departmentType,
+            Integer nowNum, String updateTime) {
+        this.id = id;
+        this.email = email;
+        this.username = username;
+        this.plainPassword = plainPassword;
+        this.password = password;
+        this.salt = salt;
+        this.creatDatetime = creatDatetime;
+        this.address = address;
+        this.politicalStatus = politicalStatus;
+        this.phone = phone;
+        this.birthday = birthday;
+        this.sex = sex;
+        this.allowNum = allowNum;
+        this.department = department;
+        this.grade = grade;
+        this.treatmentPrice = treatmentPrice;
+        this.wordAddress = wordAddress;
+        this.workDateTime = workDateTime;
+        this.workStatus = workStatus;
+        this.emailStatus = emailStatus;
+        this.validateCode = validateCode;
+        this.departmentType = departmentType;
+        this.nowNum = nowNum;
+        this.updateTime = updateTime;
+    }
+    
+    /**
+     * get set 方法
+     */
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPlainPassword() {
+        return plainPassword;
+    }
+
+    public void setPlainPassword(String plainPassword) {
+        this.plainPassword = plainPassword;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public String getCreatDatetime() {
+        return creatDatetime;
+    }
+
+    public void setCreatDatetime(String creatDatetime) {
+        this.creatDatetime = creatDatetime;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPoliticalStatus() {
+        return politicalStatus;
+    }
+
+    public void setPoliticalStatus(String politicalStatus) {
+        this.politicalStatus = politicalStatus;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public Integer getAllowNum() {
+        return allowNum;
+    }
+
+    public void setAllowNum(Integer allowNum) {
+        this.allowNum = allowNum;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public String getTreatmentPrice() {
+        return treatmentPrice;
+    }
+
+    public void setTreatmentPrice(String treatmentPrice) {
+        this.treatmentPrice = treatmentPrice;
+    }
+
+    public String getWordAddress() {
+        return wordAddress;
+    }
+
+    public void setWordAddress(String wordAddress) {
+        this.wordAddress = wordAddress;
+    }
+
+    public String getWorkDateTime() {
+        return workDateTime;
+    }
+
+    public void setWorkDateTime(String workDateTime) {
+        this.workDateTime = workDateTime;
+    }
+
+    public String getWorkStatus() {
+        return workStatus;
+    }
+
+    public void setWorkStatus(String workStatus) {
+        this.workStatus = workStatus;
+    }
+
+    public Integer getEmailStatus() {
+        return emailStatus;
+    }
+
+    public void setEmailStatus(Integer emailStatus) {
+        this.emailStatus = emailStatus;
+    }
+
+    public String getValidateCode() {
+        return validateCode;
+    }
+
+    public void setValidateCode(String validateCode) {
+        this.validateCode = validateCode;
+    }
+
+    public String getDepartmentType() {
+        return departmentType;
+    }
+
+    public void setDepartmentType(String departmentType) {
+        this.departmentType = departmentType;
+    }
+
+    public Integer getNowNum() {
+        return nowNum;
+    }
+
+    public void setNowNum(Integer nowNum) {
+        this.nowNum = nowNum;
+    }
+
+    public String getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    /**
+     * toString方法
+     */
+    @Override
+    public String toString() {
+        return "UserPojo [id=" + id + ", email=" + email + ", username=" + username + ", plainPassword=" + plainPassword
+                + ", password=" + password + ", salt=" + salt + ", creatDatetime=" + creatDatetime + ", address="
+                + address + ", politicalStatus=" + politicalStatus + ", phone=" + phone + ", birthday=" + birthday
+                + ", sex=" + sex + ", allowNum=" + allowNum + ", department=" + department + ", grade=" + grade
+                + ", treatmentPrice=" + treatmentPrice + ", wordAddress=" + wordAddress + ", workDateTime="
+                + workDateTime + ", workStatus=" + workStatus + ", emailStatus=" + emailStatus + ", validateCode="
+                + validateCode + ", departmentType=" + departmentType + ", nowNum=" + nowNum + ", updateTime="
+                + updateTime + "]";
+    }
+    
+    
+    
+}

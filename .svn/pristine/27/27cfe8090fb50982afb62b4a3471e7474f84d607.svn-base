@@ -1,0 +1,18 @@
+package com.cy.hisystem.service;
+
+import java.util.List;
+
+import com.cy.hisystem.pojo.UserPojo;
+
+/**
+ * 用户表相关操作接口
+ * @author 李溢
+ *
+ */
+public interface UserService {
+    /**
+     * 从User表中获取用户中所有的挂号医生信息
+     * @return
+     */
+    List<UserPojo> getAllRegisterDoctor(String department,String registerType);
+}

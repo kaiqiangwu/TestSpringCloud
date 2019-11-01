@@ -1,0 +1,54 @@
+package com.cy.hisystem.util;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import org.apache.ibatis.javassist.expr.NewArray;
+
+/**
+ * 关于时间的工具类
+ *
+ * @author 吴凯强
+ */
+public class DateUtil {
+	/**
+	 * 传入一个日期，输出年龄
+	 * @param birthday 生日
+	 * @return 年龄
+	 * @throws ParseException
+	 */
+	public static Integer getAge(String birthday) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date birthdayTime = sdf.parse(birthday);
+		Calendar cal = Calendar.getInstance();
+		// 获取当前年月日
+		int currentYear = cal.get(Calendar.YEAR);
+		int currentMonth = cal.get(Calendar.MONTH);
+		int currentDay = cal.get(Calendar.DAY_OF_MONTH);
+
+		// 获取出生年月日
+		cal.setTime(birthdayTime);
+		int birthdayYear = cal.get(Calendar.YEAR);
+		int birthdayMonth = cal.get(Calendar.MONTH);
+		int birthdayDay = cal.get(Calendar.DAY_OF_MONTH);
+
+		int age = currentYear - birthdayYear;
+		if (currentMonth < birthdayMonth || currentMonth == birthdayMonth && currentDay < birthdayDay) {
+			age--;
+		}
+		return age;
+	}
+	
+	/**
+	 * 
+	 * @return 当前时间的字符串格式yyyy-MM-
+	 */
+	public static String getCurrentTimeString() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String currentTime = sdf.format(new Date());
+		return currentTime;
+	}
+
+}

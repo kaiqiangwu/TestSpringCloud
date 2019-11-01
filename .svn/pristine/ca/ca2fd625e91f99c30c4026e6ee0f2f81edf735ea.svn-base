@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--Mapper文件 Leo 徐忠春 -->
+<mapper namespace="com.cy.hisystem.dao.AdminAnnouncementdao">
+	<!--添加公告 -->
+	<insert id="addAnnouncement">
+		insert into his_announcement values
+		(#{id},#{title},#{contents},#{createDatetime},#{annStatus},#{annDate});
+	</insert>
+	<!--查看所有公告,使用分页助手 -->
+	<select id="findAnnouncement"
+		resultType="com.cy.hisytem.pojo.vo.AnnouncementVo">
+		select *
+		from his_announcement
+		order by ann_date  desc 
+	</select>
+	<!--根据id删除公告信息  -->
+	<delete id="deleteAnnouncement">
+	delete from his_announcement where id=#{id};
+	</delete>
+	<!--根据id修改公告信息  -->
+	<delete id="updateAnnouncement">
+	update his_announcement set title=#{title},contents=#{contents},
+	ann_date=now() where id=#{id};
+	</delete>
+	<!--把公告添加到主页  -->
+	<delete id="insertAnnouncement">
+	update his_announcement set ann_status=#{annStatus},ann_date=now()
+	 where id=#{id};
+	</delete>
+	<!--把公告从主页移除  -->
+	<update id="subAnnouncement">
+	update his_announcement set ann_status=#{annStatus},ann_date=now()
+	 where id=#{id};
+	</update>
+</mapper>
+
+
+
+
